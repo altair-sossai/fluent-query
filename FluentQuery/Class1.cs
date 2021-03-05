@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace FluentQuery
 {
-    public class Main
-    {
-        public Main()
-        {
-            var products = new List<Product>();
-
-            var query = products.Filter<ProductQuery>();
-        }
-    }
-
     public class ProductQuery : AbstractQuery<Product>
     {
         public ProductQuery()
@@ -23,9 +12,6 @@ namespace FluentQuery
 
             QueryFor(f => f.Actived)
                 .IsFalse();
-
-            QueryFor(f => f.Created)
-                .GreaterOrEqualTo(DateTime.Now);
         }
     }
 
@@ -65,11 +51,6 @@ namespace FluentQuery
         }
     }
 
-    public class ProductQueryCommand
-    {
-        public Guid Id { get; set; }
-    }
-
     public class Product
     {
         public Guid Id { get; set; }
@@ -77,6 +58,12 @@ namespace FluentQuery
         public decimal Price { get; set; }
         public DateTime Created { get; set; }
         public Color Color { get; set; }
+        public bool Actived { get; set; }
+        public Category Category { get; set; }
+    }
+
+    public class Category
+    {
         public bool Actived { get; set; }
     }
 
