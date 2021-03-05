@@ -9,7 +9,8 @@ namespace FluentQuery
         public Main()
         {
             var products = new List<Product>();
-            var productQuery = new ProductQuery();
+
+            var query = products.Filter<ProductQuery>();
         }
     }
 
@@ -22,6 +23,9 @@ namespace FluentQuery
 
             QueryFor(f => f.Actived)
                 .IsFalse();
+
+            QueryFor(f => f.Created)
+                .GreaterOrEqualTo(DateTime.Now);
         }
     }
 
