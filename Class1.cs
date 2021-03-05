@@ -1,7 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace FluentQuery
 {
+    public class Main
+    {
+        public Main()
+        {
+            var products = new List<Product>();
+            var productQuery = new ProductQuery();
+        }
+    }
+
     public class ProductQuery : AbstractQuery<Product>
     {
         public ProductQuery()
@@ -16,18 +27,29 @@ namespace FluentQuery
 
     public abstract class AbstractQuery<T>
     {
-        protected QueryBuilder<T> QueryFor(Func<T, bool> func)
+        protected QueryBuilder<T> QueryFor(Expression<Func<T, bool>> expression)
         {
-            return null;
+            return new QueryBuilder<T>(expression);
         }
     }
 
-    public class QueryBuilder<T, TP>
+    public class QueryBuilder<T, TProperty>
     {
+        protected readonly Expression<Func<T, TProperty>> Expression;
+
+        public QueryBuilder(Expression<Func<T, TProperty>> expression)
+        {
+            Expression = expression;
+        }
     }
 
     public class QueryBuilder<T> : QueryBuilder<T, bool>
     {
+        public QueryBuilder(Expression<Func<T, bool>> expression)
+            : base(expression)
+        {
+        }
+
         public QueryBuilder<T> IsTrue()
         {
             return this;
