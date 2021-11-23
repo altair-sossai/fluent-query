@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using FluentQuery.Filters.Builders;
+using FluentQuery.Filters.Operator;
 
 namespace FluentQuery.Filters.Operations
 {
@@ -15,7 +17,7 @@ namespace FluentQuery.Filters.Operations
         private static Type[] Types => _types ??= new[] {Type};
         private static MethodInfo MethodInfo => _methodInfo ??= Type.GetMethod("StartsWith", Types);
 
-        public static IFilter<T, string> StartsWith<T>(this IFilter<T, string> filter, string value)
+        public static ILogicalOperator<T, string> StartsWith<T>(this IFilterBuilder<T, string> filter, string value)
         {
             var property = filter.Property.Body;
             var constant = Expression.Constant(value, Type);
@@ -24,9 +26,7 @@ namespace FluentQuery.Filters.Operations
             var parameter = parameters.First();
             var expression = Expression.Lambda<Func<T, bool>>(operation, parameter);
 
-            filter.Expression = expression;
-
-            return filter;
+            return filter.Append(expression);
         }
     }
 }

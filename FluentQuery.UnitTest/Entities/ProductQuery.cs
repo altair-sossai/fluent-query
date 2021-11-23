@@ -8,7 +8,10 @@ namespace FluentQuery.UnitTest.Entities
         {
             FilterFor(f => f.Title)
                 .IsNotNull()
-                .StartsWith("M");
+                .And()
+                .StartsWith("M")
+                .Or()
+                .StartsWith("T");
         }
     }
 }

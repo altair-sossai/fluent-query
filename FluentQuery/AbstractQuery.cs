@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using FluentQuery.Filters;
+using FluentQuery.Filters.Builders;
 
 namespace FluentQuery
 {
@@ -24,9 +25,9 @@ namespace FluentQuery
             return filter;
         }
 
-        public IFilter<T, TProperty> FilterFor<TProperty>(Expression<Func<T, TProperty>> property)
+        public IFilterBuilder<T, TProperty> FilterFor<TProperty>(Expression<Func<T, TProperty>> property)
         {
-            var filter = new Filter<T, TProperty>(property);
+            var filter = new FilterBuilder<T, TProperty>(property);
 
             _filters.Add(filter);
 

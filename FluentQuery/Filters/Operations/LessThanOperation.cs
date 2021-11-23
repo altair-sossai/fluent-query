@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using FluentQuery.Filters.Builders;
+using FluentQuery.Filters.Operator;
 
 namespace FluentQuery.Filters.Operations
 {
     public static class LessThanOperation
     {
-        public static IFilter<T, TProperty> LessThan<T, TProperty>(this IFilter<T, TProperty> filter, TProperty value)
+        public static ILogicalOperator<T, TProperty> LessThan<T, TProperty>(this IFilterBuilder<T, TProperty> filter, TProperty value)
         {
             var property = filter.Property.Body;
             var constant = Expression.Constant(value, typeof(TProperty));
@@ -15,9 +17,7 @@ namespace FluentQuery.Filters.Operations
             var parameter = parameters.First();
             var expression = Expression.Lambda<Func<T, bool>>(operation, parameter);
 
-            filter.Expression = expression;
-
-            return filter;
+            return filter.Append(expression);
         }
     }
 }

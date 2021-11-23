@@ -1,8 +1,11 @@
-﻿namespace FluentQuery.Filters.Operations
+﻿using FluentQuery.Filters.Builders;
+using FluentQuery.Filters.Operator;
+
+namespace FluentQuery.Filters.Operations
 {
     public static class IsTrueOperation
     {
-        public static IFilter<T, bool> IsTrue<T>(this IFilter<T, bool> filter)
+        public static ILogicalOperator<T, bool> IsTrue<T>(this IFilterBuilder<T, bool> filter)
         {
             return filter.Equal(true);
         }
