@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using FluentQuery.Extensions;
+using FluentQuery.UnitTest.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluentQuery.UnitTest
@@ -13,17 +14,44 @@ namespace FluentQuery.UnitTest
         {
             var products = new List<Product>
             {
-                new Product {Name = "01", Amount = 10, Actived = false, Category = new Category {Actived = false}},
-                new Product {Name = "02", Amount = 11, Actived = false, Category = new Category {Actived = false}},
-                new Product {Name = "03", Amount = 8, Actived = true, Category = new Category {Actived = true}},
-                new Product {Name = "04", Amount = 5, Actived = true, Category = new Category {Actived = true}},
-                new Product {Name = "05", Amount = 4, Actived = false, Category = new Category {Actived = true}}
+                new Product
+                {
+                    Id = 1,
+                    Title = "Mouse",
+                    Active = true,
+                    Category = new Category {Id = 3}
+                },
+                new Product
+                {
+                    Id = 2,
+                    Title = "Keyboard",
+                    Active = true,
+                    Category = new Category {Id = 3}
+                },
+                new Product
+                {
+                    Id = 3,
+                    Active = false,
+                    Category = new Category {Id = 1}
+                },
+                new Product
+                {
+                    Id = 4,
+                    Active = true,
+                    Category = new Category {Id = 2}
+                },
+                new Product
+                {
+                    Id = 5,
+                    Active = false,
+                    Category = new Category {Id = 2}
+                }
             };
 
-            var productQuery = new ProductQuery();
+            var query = new ProductQuery();
 
-            foreach (var product in productQuery.ExecuteQuery(products.AsQueryable()).ToList())
-                Console.WriteLine(product.Name);
+            foreach (var product in products.ApplyQuery(query))
+                Console.WriteLine(product.Id);
         }
     }
 }
