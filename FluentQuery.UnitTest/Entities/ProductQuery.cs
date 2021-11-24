@@ -6,9 +6,10 @@ namespace FluentQuery.UnitTest.Entities
     {
         public ProductQuery()
         {
-            Where(w => w.Active);
+            Where(w => w.Active)
+                .And(w => w.Title == "A");
 
-            FilterFor(f => f.Active)
+            /*FilterFor(f => f.Active)
                 .IsTrue()
                 .Or()
                 .IsNull();
@@ -18,7 +19,7 @@ namespace FluentQuery.UnitTest.Entities
                 .And()
                 .StartsWith("M")
                 .Or()
-                .StartsWith("T");
+                .StartsWith("T");*/
         }
     }
 }

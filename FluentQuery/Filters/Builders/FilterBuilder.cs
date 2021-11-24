@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Linq.Expressions;
-using FluentQuery.Filters.Builders.Abstractions;
 using FluentQuery.Filters.Operator;
 
 namespace FluentQuery.Filters.Builders
 {
-    public class FilterBuilder<T, TProperty> : AbstractFilterBuilder<T, TProperty>
+    public class FilterBuilder<T, TProperty> : IFilterBuilder<T, TProperty>
     {
         public FilterBuilder(Expression<Func<T, TProperty>> property)
-            : base(property)
         {
+            Property = property;
         }
 
-        public override ILogicalOperator<T, TProperty> Append(Expression<Func<T, bool>> expression)
+        public Expression<Func<T, TProperty>> Property { get; }
+        public IFilter<T> Filter { get; private set; }
+
+        public ILogicalOperator<T, TProperty> Append(Expression<Func<T, bool>> expression)
         {
-            Expression = expression;
+            Filter = new Filter<T>(expression);
 
             return new LogicalOperator<T, TProperty>(this);
         }

@@ -27,11 +27,11 @@ namespace FluentQuery
 
         public IFilterBuilder<T, TProperty> FilterFor<TProperty>(Expression<Func<T, TProperty>> property)
         {
-            var filter = new FilterBuilder<T, TProperty>(property);
+            var builder = new FilterBuilder<T, TProperty>(property);
 
-            _filters.Add(filter);
+            _filters.Add(builder.Filter);
 
-            return filter;
+            return builder;
         }
 
         public IQueryable<T> ApplyQuery(IQueryable<T> queryable)
