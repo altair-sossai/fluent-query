@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
+using FluentQuery.Extensions;
 using FluentQuery.Filters.Builders;
-using FluentQuery.Filters.Extensions;
 
 namespace FluentQuery.Filters
 {
