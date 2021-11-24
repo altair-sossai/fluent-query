@@ -7,7 +7,7 @@ using FluentQuery.Filters.Operator;
 
 namespace FluentQuery.Filters.Operations
 {
-    public static class StartsWithOperation
+    public static class EndsWithOperation
     {
         private static MethodInfo _methodInfo;
         private static Type[] _types;
@@ -15,9 +15,9 @@ namespace FluentQuery.Filters.Operations
 
         private static Type Type => _type ??= typeof(string);
         private static Type[] Types => _types ??= new[] {Type};
-        private static MethodInfo MethodInfo => _methodInfo ??= Type.GetMethod(nameof(string.StartsWith), Types);
+        private static MethodInfo MethodInfo => _methodInfo ??= Type.GetMethod(nameof(string.EndsWith), Types);
 
-        public static ILogicalOperator<T, string> StartsWith<T>(this IFilterBuilder<T, string> filter, string value)
+        public static ILogicalOperator<T, string> EndsWith<T>(this IFilterBuilder<T, string> filter, string value)
         {
             var property = filter.Property.Body;
             var constant = Expression.Constant(value, Type);

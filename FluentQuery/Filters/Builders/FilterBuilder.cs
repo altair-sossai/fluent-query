@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using FluentQuery.Filters.Builders.Abstractions;
 using FluentQuery.Filters.Operator;
 
 namespace FluentQuery.Filters.Builders

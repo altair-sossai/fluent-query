@@ -1,4 +1,5 @@
 ﻿using FluentQuery.Filters.Builders;
+using FluentQuery.Filters.Builders.Operators;
 
 namespace FluentQuery.Filters.Operator
 {

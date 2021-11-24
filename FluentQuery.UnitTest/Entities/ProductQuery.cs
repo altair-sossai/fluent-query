@@ -6,6 +6,13 @@ namespace FluentQuery.UnitTest.Entities
     {
         public ProductQuery()
         {
+            Where(w => w.Active);
+
+            FilterFor(f => f.Active)
+                .IsTrue()
+                .Or()
+                .IsNull();
+
             FilterFor(f => f.Title)
                 .IsNotNull()
                 .And()

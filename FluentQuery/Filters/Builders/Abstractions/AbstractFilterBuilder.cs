@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using FluentQuery.Filters.Operator;
 
-namespace FluentQuery.Filters.Builders
+namespace FluentQuery.Filters.Builders.Abstractions
 {
     public abstract class AbstractFilterBuilder<T, TProperty> : IFilterBuilder<T, TProperty>
     {

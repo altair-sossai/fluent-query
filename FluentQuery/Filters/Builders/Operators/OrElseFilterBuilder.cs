@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
+using FluentQuery.Filters.Builders.Abstractions;
 using FluentQuery.Filters.Extensions;
 using FluentQuery.Filters.Operator;
 
-namespace FluentQuery.Filters.Builders
+namespace FluentQuery.Filters.Builders.Operators
 {
     public class OrElseFilterBuilder<T, TProperty> : AbstractFilterBuilder<T, TProperty>
     {
