@@ -9,11 +9,11 @@ namespace FluentQuery
 {
     public abstract class AbstractQuery<T>
     {
-        private readonly List<IFilter<T>> _filters;
+        private readonly List<IFilterBuilder<T>> _filters;
 
         protected AbstractQuery()
         {
-            _filters = new List<IFilter<T>>();
+            _filters = new List<IFilterBuilder<T>>();
         }
 
         public IFilter<T> Where(Expression<Func<T, bool>> expression)
@@ -29,15 +29,20 @@ namespace FluentQuery
         {
             var builder = new FilterBuilder<T, TProperty>(property);
 
-            _filters.Add(builder.Filter);
+            _filters.Add(builder);
 
             return builder;
         }
 
         public IQueryable<T> ApplyQuery(IQueryable<T> queryable)
         {
-            foreach (var filter in _filters)
-                queryable = queryable.Where(filter.Expression);
+            foreach (var builder in _filters)
+            {
+                var filter = builder.Filter;
+                var expression = filter.Expression;
+
+                queryable = queryable.Where(expression);
+            }
 
             return queryable;
         }

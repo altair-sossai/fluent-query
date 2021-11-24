@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
+using FluentQuery.Filters.Builders;
 using FluentQuery.Filters.Extensions;
 
 namespace FluentQuery.Filters
 {
-    public class Filter<T> : IFilter<T>
+    public class Filter<T> : IFilter<T>, IFilterBuilder<T>
     {
         public Filter(Expression<Func<T, bool>> expression)
         {
@@ -26,5 +27,7 @@ namespace FluentQuery.Filters
 
             return this;
         }
+
+        IFilter<T> IFilterBuilder<T>.Filter => this;
     }
 }

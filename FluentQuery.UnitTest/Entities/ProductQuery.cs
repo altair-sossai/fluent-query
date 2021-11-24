@@ -6,20 +6,22 @@ namespace FluentQuery.UnitTest.Entities
     {
         public ProductQuery()
         {
-            Where(w => w.Active)
-                .And(w => w.Title == "A");
+            Where(w => w.Id == 1 && w.Active)
+                .And(a => a.Title == "Oi")
+                .And(f => f.Category != null)
+                .And(b => b.Category.Id == b.Id)
+                .And(c => c.Id > 10)
+                .And(d => d.Active);
 
-            /*FilterFor(f => f.Active)
+            FilterFor(f => f.Active)
                 .IsTrue()
                 .Or()
-                .IsNull();
+                .IsTrue();
 
             FilterFor(f => f.Title)
                 .IsNotNull()
                 .And()
-                .StartsWith("M")
-                .Or()
-                .StartsWith("T");*/
+                .StartsWith("M");
         }
     }
 }
