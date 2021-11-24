@@ -29,5 +29,10 @@ namespace FluentQuery.Filters
         }
 
         IFilter<T> IFilterBuilder<T>.Filter => this;
+
+        public override string ToString()
+        {
+            return Expression?.ToString() ?? base.ToString();
+        }
     }
 }
