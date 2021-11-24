@@ -7,7 +7,7 @@ namespace FluentQuery.Extensions
 {
     public static class ExpressionExtensions
     {
-        public static Expression<Func<T, bool>> UpdateParameter<T>(this Expression<Func<T, bool>> expression, ParameterExpression newParameter)
+        public static Expression<Func<T, bool>> ReplaceParameter<T>(this Expression<Func<T, bool>> expression, ParameterExpression newParameter)
         {
             var parameters = expression.Parameters;
             var parameter = parameters.First();

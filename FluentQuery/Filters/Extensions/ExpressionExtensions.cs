@@ -11,7 +11,7 @@ namespace FluentQuery.Filters.Extensions
         {
             var parameters = left.Parameters;
             var parameter = parameters.First();
-            var rightExpression = right.UpdateParameter(parameter);
+            var rightExpression = right.ReplaceParameter(parameter);
             var andAlso = Expression.AndAlso(left.Body, rightExpression.Body);
             var expression = Expression.Lambda<Func<T, bool>>(andAlso, parameter);
 
@@ -22,7 +22,7 @@ namespace FluentQuery.Filters.Extensions
         {
             var parameters = left.Parameters;
             var parameter = parameters.First();
-            var rightExpression = right.UpdateParameter(parameter);
+            var rightExpression = right.ReplaceParameter(parameter);
             var orElse = Expression.OrElse(left.Body, rightExpression.Body);
             var expression = Expression.Lambda<Func<T, bool>>(orElse, parameter);
 
